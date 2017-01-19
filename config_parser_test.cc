@@ -74,6 +74,7 @@ TEST_F(NginxStringConfigTest, ValidEmptyConfig) {
     ASSERT_TRUE(ParseString("")) << "Empty config files should still be parseable";
 }
 
+
 TEST_F(NginxStringConfigTest, ValidMultipleNestedConfigs) {
     ASSERT_TRUE(ParseString("foo bar; server { foo bar; http {foo bar;} }")) << "Config statements with multiple child blocks should be parsed successfully";
 }
@@ -98,5 +99,8 @@ TEST_F(NginxStringConfigTest, InvalidStatementUnbalancedBraces_2) {
     ASSERT_FALSE(ParseString("foo bar; foo { foo bar; server { fizz buzz; { {")) << "Curly braces must be balanced";
 }
 
+TEST_F(NginxStringConfigTest, InvalidDoubleBraces) {
+    ASSERT_FALSE(ParseString("{{port 100;}}")) << "Double braces should be invalid";
+}
 
 
