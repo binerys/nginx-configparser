@@ -3,3 +3,4 @@ config_parser_test
 config_parser.dSYM/
 gtest-all.*
 libgtest.*
+*.o
